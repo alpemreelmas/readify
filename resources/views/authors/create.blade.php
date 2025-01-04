@@ -3,10 +3,20 @@
 @section('title', 'Add New Author')
 
 @section('header', 'Add New Author')
-
 @section('content')
     <div class="max-w-2xl mx-auto py-10">
         <h2 class="text-3xl font-extrabold mb-6 text-blue-600">Add a New Author</h2>
+        
+        @if ($errors->any())
+            <div class="mb-4">
+                <ul class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{ route('authors.store') }}" method="POST">
             @csrf
             <div class="mb-4">
