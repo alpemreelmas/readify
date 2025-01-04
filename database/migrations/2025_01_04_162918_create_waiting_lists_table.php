@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         DB::statement("CREATE TABLE waiting_lists (
-            id INT AUTO_INCREMENT PRIMARY KEY,
+            id INTEGER PRIMARY KEY,
             member_id INT NOT NULL,
             book_id INT NOT NULL,
             position INT NOT NULL,

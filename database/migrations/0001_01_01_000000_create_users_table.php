@@ -13,7 +13,7 @@ return new class extends Migration {
     {
         DB::statement("
             CREATE TABLE users (
-                id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                id INTEGER PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
                 email VARCHAR(255) UNIQUE NOT NULL,
                 email_verified_at TIMESTAMP NULL,

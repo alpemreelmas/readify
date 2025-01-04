@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         DB::statement("CREATE TABLE authors (
-            id INT AUTO_INCREMENT PRIMARY KEY,
+            id INTEGER PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             picture TEXT,
             date_of_birth DATE,
