@@ -91,3 +91,24 @@ VALUES (1, 2, '2024-11-01', 14, '2024-11-15', 1),
        (8, 9, '2024-11-12', 7, '2024-11-19', 8),
        (9, 10, '2024-11-13', 14, '2024-11-27', 9),
        (10, 1, '2024-11-14', 21, '2024-12-05', 10);
+
+INSERT INTO waiting_lists (member_id, book_id, position, status, start_date, finish_date)
+VALUES 
+    -- Waiting for '1984' (book_id: 1) - rented on 2024-11-01 until 2024-11-15
+    (3, 1, 1, 'waiting', '2024-11-01', NULL),
+    (4, 1, 2, 'waiting', '2024-11-01', NULL),
+    
+    -- Waiting for 'Harry Potter' (book_id: 6) - rented on 2024-11-09 until 2024-11-23
+    (1, 6, 1, 'waiting', '2024-11-09', NULL),
+    (2, 6, 2, 'waiting', '2024-11-09', NULL),
+    (3, 6, 3, 'waiting', '2024-11-09', NULL),
+    
+    -- Waiting for 'War and Peace' (book_id: 9) - rented on 2024-11-13 until 2024-11-27
+    (5, 9, 1, 'waiting', '2024-11-13', NULL),
+    (6, 9, 2, 'waiting', '2024-11-13', NULL),
+    
+    -- Example of completed wait for 'Tom Sawyer' (book_id: 3) - rented on 2024-11-05
+    (8, 3, 1, 'completed', '2024-11-05', '2024-11-05'),
+    
+    -- Example of cancelled wait for 'Tale of Two Cities' (book_id: 5) - rented on 2024-11-07
+    (9, 5, 1, 'cancelled', '2024-11-07', '2024-11-07');
