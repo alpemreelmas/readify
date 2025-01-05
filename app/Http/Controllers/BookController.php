@@ -12,7 +12,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = \DB::select('SELECT * FROM books');
+        $books = \DB::select('SELECT books.*, authors.name as author_name, genres.name as genre_name FROM books
+                              JOIN authors ON books.author_id = authors.id
+                              JOIN genres ON books.genre_id = genres.id');
         return view('books.index', compact('books'));
     }
 
@@ -33,12 +35,16 @@ class BookController extends Controller
     {
         $validated = $request->validated();
 
-        \DB::insert('INSERT INTO books (title, author_id, genre_id, published_date, summary) VALUES (?, ?, ?, ?, ?)', [
+        \DB::insert('INSERT INTO books (title, author_id, genre_id, published_at, summary, picture, page_count, original_language, published_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [
             $validated['title'],
             $validated['author_id'],
             $validated['genre_id'],
-            $validated['published_date'],
-            $validated['summary']
+            $validated['published_at'],
+            $validated['summary'],
+            $validated['picture'],
+            $validated['page_count'],
+            $validated['original_language'],
+            $validated['published_by']
         ]);
 
         return redirect()->route('books.index')
@@ -50,7 +56,12 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        $book = \DB::selectOne('SELECT * FROM books WHERE id = ?', [$id]);
+        $book = \DB::selectOne('SELECT books.*, authors.name as author_name, genres.name as genre_name FROM books
+                                JOIN authors ON books.author_id = authors.id
+                                JOIN genres ON books.genre_id = genres.id
+                                WHERE books.id = ?', [$id]);
+        $book->rentals = \DB::select('SELECT rentals.*, members.first_name as member_first_name, members.last_name as member_last_name FROM rentals JOIN members ON rentals.member_id = members.id WHERE rentals.book_id = ?', [$id]);
+        $book->waitingList = \DB::select('SELECT waiting_lists.*, members.first_name as member_first_name, members.last_name as member_last_name FROM waiting_lists JOIN members ON waiting_lists.member_id = members.id WHERE waiting_lists.book_id = ?', [$id]);
         return view('books.show', compact('book'));
     }
 
@@ -74,8 +85,12 @@ class BookController extends Controller
             $validated['title'],
             $validated['author_id'],
             $validated['genre_id'],
-            $validated['published_date'],
+            $validated['published_at'],
             $validated['summary'],
+            $validated['picture'],
+            $validated['page_count'],
+            $validated['original_language'],
+            $validated['published_by'],
             $id
         ]);
 

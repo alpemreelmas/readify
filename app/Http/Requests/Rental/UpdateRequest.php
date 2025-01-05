@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
             'book_id' => 'required|integer',
             'user_id' => 'required|integer',
             'rental_date' => 'required|date',
-            'return_date' => 'nullable|date',
+            'duration_of_rent' => 'required|integer',
         ];
     }
 }

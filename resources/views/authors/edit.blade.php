@@ -8,15 +8,7 @@
     <div class="max-w-2xl mx-auto py-10">
         <h2 class="text-3xl font-extrabold mb-6 text-blue-600">Edit Author</h2>
         
-        @if ($errors->any())
-            <div class="mb-4">
-                <ul class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        <x-alert />
 
         <form action="{{ route('authors.update', $author->id) }}" method="POST">
             @csrf

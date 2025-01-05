@@ -31,9 +31,8 @@ class GenreController extends Controller
     {
         $validated = $request->validated();
         
-        \DB::insert('INSERT INTO genres (name, description) VALUES (?, ?)', [
-            $validated['name'],
-            $validated['description']
+        \DB::insert('INSERT INTO genres (name) VALUES (?)', [
+            $validated['name']
         ]);
 
         return redirect()->route('genres.index')
@@ -46,7 +45,11 @@ class GenreController extends Controller
     public function show(string $id)
     {
         $genre = \DB::selectOne('SELECT * FROM genres WHERE id = ?', [$id]);
-        $books = \DB::select('SELECT * FROM books WHERE genre_id = ?', [$id]);
+        if (!$genre) {
+            return redirect()->route('genres.index')
+                ->with('error', 'Genre not found.');
+        }
+        $books = \DB::select('SELECT * FROM books WHERE genre_id = ?', [$genre->id]);
         
         return view('genres.show', compact('genre', 'books'));
     }
@@ -67,9 +70,8 @@ class GenreController extends Controller
     {
         $validated = $request->validated();
 
-        \DB::update('UPDATE genres SET name = ?, description = ? WHERE id = ?', [
+        \DB::update('UPDATE genres SET name = ? WHERE id = ?', [
             $validated['name'],
-            $validated['description'],
             $id
         ]);
 

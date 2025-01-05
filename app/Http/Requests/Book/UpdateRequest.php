@@ -24,9 +24,13 @@ class UpdateRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'author_id' => 'required|integer',
+            'picture' => 'nullable|string',
+            'summary' => 'nullable|string',
+            'page_count' => 'required|integer',
+            'original_language' => 'required|string|max:255',
             'genre_id' => 'required|integer',
-            'published_date' => 'required|date',
-            'summary' => 'required|string',
+            'published_by' => 'nullable|string|max:255',
+            'published_at' => 'nullable|date',
         ];
     }
 }

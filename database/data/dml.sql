@@ -81,34 +81,33 @@ VALUES ('John', 'Doe', 'john.doe@example.com', '1990-02-15', '123 Main St, Sprin
        ('Olivia', 'Anderson', 'olivia.anderson@example.com', '1989-06-13', '707 Cherry St, Dallas, TX 75201');
 
 INSERT INTO rentals (book_id, member_id, rented_at, duration_of_rent, returned_at, operator_id)
-VALUES (1, 2, '2024-11-01', 14, '2024-11-15', 1),
-       (2, 3, '2024-11-03', 7, '2024-11-10', 2),
-       (3, 4, '2024-11-05', 30, '2024-12-05', 3),
-       (4, 5, '2024-11-06', 21, '2024-11-27', 4),
-       (5, 6, '2024-11-07', 10, '2024-11-17', 5),
-       (6, 7, '2024-11-09', 14, '2024-11-23', 6),
-       (7, 8, '2024-11-10', 28, '2024-12-08', 7),
-       (8, 9, '2024-11-12', 7, '2024-11-19', 8),
-       (9, 10, '2024-11-13', 14, '2024-11-27', 9),
-       (10, 1, '2024-11-14', 21, '2024-12-05', 10);
+VALUES (1, 2, '2024-11-01', 14, null, 1),
+       (2, 3, '2024-11-03', 7, null, 2),
+       (3, 4, '2024-11-05', 30, null, 3),
+       (4, 5, '2024-11-06', 21, null, 4),
+       (5, 6, '2024-11-07', 10, null, 5),
+       (6, 7, '2024-11-09', 14, null, 6),
+       (7, 8, '2024-11-10', 28, null, 7),
+       (8, 9, '2024-11-12', 7, null, 8),
+       (9, 10, '2024-11-13', 14, null, 9),
+       (10, 1, '2024-11-14', 21, null, 10);
 
-INSERT INTO waiting_lists (member_id, book_id, position, status, start_date, finish_date)
-VALUES 
+INSERT INTO waiting_lists (member_id, book_id, position)
+VALUES
     -- Waiting for '1984' (book_id: 1) - rented on 2024-11-01 until 2024-11-15
-    (3, 1, 1, 'waiting', '2024-11-01', NULL),
-    (4, 1, 2, 'waiting', '2024-11-01', NULL),
-    
+    (3, 1, 1 ),
+    (4, 1, 2 ),
+
     -- Waiting for 'Harry Potter' (book_id: 6) - rented on 2024-11-09 until 2024-11-23
-    (1, 6, 1, 'waiting', '2024-11-09', NULL),
-    (2, 6, 2, 'waiting', '2024-11-09', NULL),
-    (3, 6, 3, 'waiting', '2024-11-09', NULL),
-    
+    (1, 6, 1 ),
+    (2, 6, 2 ),
+    (3, 6, 3 ),
+
     -- Waiting for 'War and Peace' (book_id: 9) - rented on 2024-11-13 until 2024-11-27
-    (5, 9, 1, 'waiting', '2024-11-13', NULL),
-    (6, 9, 2, 'waiting', '2024-11-13', NULL),
-    
+    (5, 9, 1 ),
+
     -- Example of completed wait for 'Tom Sawyer' (book_id: 3) - rented on 2024-11-05
-    (8, 3, 1, 'completed', '2024-11-05', '2024-11-05'),
-    
+    (8, 3, 1 ),
+
     -- Example of cancelled wait for 'Tale of Two Cities' (book_id: 5) - rented on 2024-11-07
-    (9, 5, 1, 'cancelled', '2024-11-07', '2024-11-07');
+    (9, 5, 1 );

@@ -16,13 +16,10 @@ return new class extends Migration
             member_id INT NOT NULL,
             book_id INT NOT NULL,
             position INT NOT NULL,
-            status VARCHAR(50) DEFAULT 'waiting',
-            start_date TIMESTAMP NULL,
-            finish_date TIMESTAMP NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (member_id) REFERENCES members(id),
-            FOREIGN KEY (book_id) REFERENCES books(id)
+            FOREIGN KEY (member_id) REFERENCES members(id) ON DELETE CASCADE,
+            FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
         )");
     }
 

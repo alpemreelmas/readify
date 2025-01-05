@@ -24,8 +24,8 @@ return new class extends Migration
             published_at DATE,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
-            FOREIGN KEY (author_id) REFERENCES authors(id)
-            FOREIGN KEY (genre_id) REFERENCES genres(id)
+            FOREIGN KEY (author_id) REFERENCES authors(id) ON DELETE CASCADE,
+            FOREIGN KEY (genre_id) REFERENCES genres(id) ON DELETE CASCADE
         )");
 
         DB::statement("CREATE INDEX title_index ON books (title)");

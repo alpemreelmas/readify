@@ -31,10 +31,11 @@ class MemberController extends Controller
     {
         $validated = $request->validated();
         
-        \DB::insert('INSERT INTO members (name, email, phone, address) VALUES (?, ?, ?, ?)', [
-            $validated['name'],
-            $validated['email'], 
-            $validated['phone'],
+        \DB::insert('INSERT INTO members (first_name, last_name, email, date_of_birth, address) VALUES (?, ?, ?, ?, ?)', [
+            $validated['first_name'],
+            $validated['last_name'],
+            $validated['email'],
+            $validated['date_of_birth'],
             $validated['address']
         ]);
 
@@ -48,6 +49,8 @@ class MemberController extends Controller
     public function show(string $id)
     {
         $member = \DB::selectOne('SELECT * FROM members WHERE id = ?', [$id]);
+        $member->rentals = \DB::select('SELECT rentals.*, books.title as book_title FROM rentals JOIN books ON rentals.book_id = books.id WHERE rentals.member_id = ?', [$id]);
+        $member->waitingList = \DB::select('SELECT waiting_lists.*, books.title as book_title FROM waiting_lists JOIN books ON waiting_lists.book_id = books.id WHERE waiting_lists.member_id = ?', [$id]);
         return view('members.show', compact('member'));
     }
 
@@ -67,10 +70,11 @@ class MemberController extends Controller
     {
         $validated = $request->validated();
 
-        \DB::update('UPDATE members SET name = ?, email = ?, phone = ?, address = ? WHERE id = ?', [
-            $validated['name'],
+        \DB::update('UPDATE members SET first_name = ?, last_name = ?, email = ?, date_of_birth = ?, address = ? WHERE id = ?', [
+            $validated['first_name'],
+            $validated['last_name'],
             $validated['email'],
-            $validated['phone'],
+            $validated['date_of_birth'],
             $validated['address'],
             $id
         ]);

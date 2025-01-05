@@ -18,14 +18,14 @@ return new class extends Migration
             member_id INT NOT NULL,
             rented_at DATE NOT NULL,
             duration_of_rent INT NOT NULL,
-            returned_at DATE NOT NULL,
+            returned_at DATE,
             operator_id INT NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             
-            FOREIGN KEY (book_id) REFERENCES books(id),
-            FOREIGN KEY (member_id) REFERENCES members(id)
-            FOREIGN KEY (operator_id) REFERENCES users(id)
+            FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
+            FOREIGN KEY (member_id) REFERENCES members(id) ON DELETE CASCADE,
+            FOREIGN KEY (operator_id) REFERENCES users(id) ON DELETE CASCADE
         )");
 
         DB::statement("CREATE INDEX book_id_index ON rentals (book_id)");

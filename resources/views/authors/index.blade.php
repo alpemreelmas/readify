@@ -16,10 +16,15 @@
                 <div class="bg-white p-6 rounded-lg shadow-lg">
                     <h3 class="text-2xl font-bold mb-2">{{ $author->name }}</h3>
                     <img src="{{ $author->picture }}" alt="{{ $author->name }}" class="w-full h-48 object-cover mb-4">
-                    <p class="text-gray-700 mb-4">{{ $author->biography }}</p>
+                    <p class="text-gray-700 mb-4">{{ Str::limit($author->biography, 100) }}</p>
                     <div class="flex justify-between items-center">
                         <a href="{{ url('authors/' . $author->id) }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">View Details</a>
                         <a href="{{ url('authors/' . $author->id . '/edit') }}" class="bg-yellow-500 text-white px-4 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">Edit</a>
+                        <form action="{{ url('authors/' . $author->id) }}" method="POST" class="inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">Delete</button>
+                        </form>
                     </div>
                 </div>
             @endforeach
