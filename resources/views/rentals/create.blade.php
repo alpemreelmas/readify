@@ -9,13 +9,20 @@
         <h2 class="text-3xl font-extrabold mb-6 text-blue-600">Create New Rental</h2>
         <x-alert />
         <form action="{{ route('rentals.store') }}" method="POST">
-            @csrf
-            <div class="mb-4">
-                <label for="book_id" class="block text-gray-700">Book ID:</label>
+            @if(count($books) == 0)
+                <div class="mb-4 bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative" role="alert">
+                    <span class="block sm:inline">No books available</span>
+                </div>
+            @endif
+                @csrf
+                <div class="mb-4">
+                    <label for="book_id" class="block text-gray-700">Book ID:</label>
                 <select name="book_id" id="book_id" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
-                    @foreach($books as $book)
+                    @forelse($books as $book)
                         <option value="{{ $book->id }}">{{ $book->title }}</option>
-                    @endforeach
+                    @empty
+                        <option value="No books available" disabled selected>No books available</option>
+                    @endforelse
                 </select>
             </div>
             <div class="mb-4">

@@ -12,21 +12,33 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home'); 
 
-// Author routes
-Route::resource('authors', AuthorController::class);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-// Book routes 
-Route::resource('books', BookController::class);
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource('authors', AuthorController::class);
 
-// Genre routes
-Route::resource('genres', GenreController::class);
+    // Book routes 
+    Route::resource('books', BookController::class);
 
-// Member routes
-Route::resource('members', MemberController::class);
+    // Genre routes
+    Route::resource('genres', GenreController::class);
 
-// Rental routes
-Route::resource('rentals', RentalController::class);
-Route::post('rentals/{rental}/return', [RentalController::class, 'returnBook'])->name('rentals.confirmReturn');
+    // Member routes
+    Route::resource('members', MemberController::class);
 
-// Waiting List routes
-Route::resource('waiting-lists', WaitingListController::class)->except(["update","create","edit","show"]);
+    // Rental routes
+    Route::resource('rentals', RentalController::class);
+    Route::post('rentals/{rental}/return', [RentalController::class, 'returnBook'])->name('rentals.confirmReturn');
+
+    // Waiting List routes
+    Route::resource('waiting-lists', WaitingListController::class)->except(["update","create","edit","show"]);
+
+
+});
+
+require __DIR__.'/auth.php';
