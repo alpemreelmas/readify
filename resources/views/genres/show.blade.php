@@ -21,6 +21,7 @@
                 <p class="text-gray-700">No books available in this genre.</p>
             @endif
         </div>
+        @if(auth()->user()?->is_admin)
         <div class="flex justify-between items-center">
             <a href="{{ url('genres/' . $genre->id . '/edit') }}" class="bg-yellow-500 text-white px-4 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">Edit Genre</a>
             <form action="{{ route('genres.destroy', $genre->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this genre?');">
@@ -29,6 +30,7 @@
                 <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">Delete Genre</button>
             </form>
         </div>
+        @endif
         <div class="mt-6">
             <a href="{{ route('genres.index') }}" class="text-blue-500 hover:underline">Back to Genres</a>
         </div>

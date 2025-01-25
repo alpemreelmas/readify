@@ -25,7 +25,7 @@ return new class extends Migration
             
             FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
             FOREIGN KEY (member_id) REFERENCES members(id) ON DELETE CASCADE,
-            FOREIGN KEY (operator_id) REFERENCES users(id) ON DELETE CASCADE
+            FOREIGN KEY (operator_id) REFERENCES members(id) ON DELETE CASCADE
         )");
 
         DB::statement("CREATE INDEX book_id_index ON rentals (book_id)");

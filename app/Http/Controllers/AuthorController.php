@@ -88,7 +88,14 @@ class AuthorController extends Controller
      */
     public function destroy(string $id)
     {
-        \DB::delete('DELETE FROM authors WHERE id = ?', [$id]);
+//         BEGIN TRANSACTION
+//            DELETE FROM books WHERE author_id = ?
+//            DELETE FROM authors WHERE id = ?
+//         ROLLBACK / COMMIT
+        \DB::transaction(function () use ($id) {
+            \DB::delete('DELETE FROM books WHERE author_id = ?', [$id]);
+            \DB::delete('DELETE FROM authors WHERE id = ?', [$id]);
+        });
 
         return redirect()->route('authors.index')
             ->with('success', 'Author deleted successfully.');

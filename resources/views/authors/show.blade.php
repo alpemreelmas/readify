@@ -24,9 +24,11 @@
             <a href="{{ route('authors.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 Back to Authors
             </a>
+            @if(auth()->user()?->is_admin)
             <a href="{{ route('authors.edit', $author->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 Edit Author
             </a>
+            @endif
         </div>
     </div>
 @endsection
