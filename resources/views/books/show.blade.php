@@ -82,9 +82,11 @@
             <a href="{{ route('books.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 Back to Books
             </a>
+            @if(auth()->user()?->is_admin)
             <a href="{{ route('books.edit', $book->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 Edit Book
             </a>
+            @endif
         </div>
     </div>
 @endsection

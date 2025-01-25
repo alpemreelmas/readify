@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
-@section('title', 'Welcome to the Library Management System')
+@section('title', 'Welcome to the LMS')
 
-@section('header', 'Welcome to the Library Management System')
+@section('header', 'Welcome to the LMS')
 
 @section('content')
     <div class="text-center py-10">

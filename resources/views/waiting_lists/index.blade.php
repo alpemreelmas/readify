@@ -17,12 +17,14 @@
                             <ul class="list-disc list-inside text-gray-700">
                                 <li>
                                     Member Email: {{ $entry->member_email }} 
-                                    (Requested on: {{ \Carbon\Carbon::parse($entry->start_date)->format('F j, Y') }})
-                                    <form action="{{ route('waiting-lists.destroy', $entry->id) }}" method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-500 hover:underline ml-2">Cancel</button>
-                                    </form>
+                                    (Requested on: {{ \Carbon\Carbon::parse($entry->created_at)->format('F j, Y') }})
+                                    @if(auth()->user()?->email == $entry->member_email || auth()->user()?->is_admin)
+                                        <form action="{{ route('waiting-lists.destroy', $entry->id) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-500 hover:underline ml-2">Cancel</button>
+                                        </form>
+                                    @endif
                                 </li>
                             </ul>
                         </div>

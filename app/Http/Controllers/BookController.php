@@ -71,7 +71,9 @@ class BookController extends Controller
     public function edit(string $id)
     {
         $book = \DB::selectOne('SELECT * FROM books WHERE id = ?', [$id]);
-        return view('books.edit', compact('book'));
+        $authors = \DB::select('SELECT * FROM authors');
+        $genres = \DB::select('SELECT * FROM genres');
+        return view('books.edit', compact('book', 'authors', 'genres'));
     }
 
     /**

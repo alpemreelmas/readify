@@ -1,7 +1,3 @@
-INSERT INTO users (name, email, password)
-VALUES ('Alp Emre Elmas', 'elmasalpemre@gmail.com',
-        '$2y$12$T2OCL4lu6qiR3i33qHc7AO5rLHXVpi0sNH2pvrkxrnAq1RWbPpa/.');
-
 INSERT INTO authors (name, picture, date_of_birth, date_of_death, biography)
 VALUES ('George Orwell', 'https://fakeimg.pl/1920x1080/?text=person%20image', '1903-06-25', '1950-01-21',
         'George Orwell was an English novelist, essayist, journalist, and critic. He is best known for his novels "Animal Farm" and "1984".'),
@@ -68,17 +64,17 @@ VALUES ('1984', 1, 'https://fakeimg.pl/1920x1080/?text=book%20image',
         'A modernist novel that follows a day in the life of Clarissa Dalloway.', 194, 'English', 8, 'Hogarth Press',
         '1925-05-14');
 
-INSERT INTO members (first_name, last_name, email, date_of_birth, address)
-VALUES ('John', 'Doe', 'john.doe@example.com', '1990-02-15', '123 Main St, Springfield, IL 62701'),
-       ('Jane', 'Smith', 'jane.smith@example.com', '1985-11-22', '456 Elm St, New York, NY 10001'),
-       ('Alice', 'Johnson', 'alice.johnson@example.com', '1992-07-30', '789 Oak St, Los Angeles, CA 90001'),
-       ('Bob', 'Brown', 'bob.brown@example.com', '1988-05-14', '101 Pine St, Chicago, IL 60601'),
-       ('Charlie', 'Davis', 'charlie.davis@example.com', '1994-01-11', '202 Maple St, Miami, FL 33101'),
-       ('Emily', 'Miller', 'emily.miller@example.com', '1996-09-05', '303 Birch St, Seattle, WA 98101'),
-       ('David', 'Wilson', 'david.wilson@example.com', '1980-12-23', '404 Cedar St, Boston, MA 02101'),
-       ('Sophia', 'Moore', 'sophia.moore@example.com', '1993-03-18', '505 Redwood St, San Francisco, CA 94101'),
-       ('Michael', 'Taylor', 'michael.taylor@example.com', '1991-10-28', '606 Willow St, Austin, TX 73301'),
-       ('Olivia', 'Anderson', 'olivia.anderson@example.com', '1989-06-13', '707 Cherry St, Dallas, TX 75201');
+INSERT INTO members (first_name, last_name, email, password, is_admin, date_of_birth, address)
+VALUES ('John', 'Doe', 'john.doe@example.com', '$2y$12$T2OCL4lu6qiR3i33qHc7AO5rLHXVpi0sNH2pvrkxrnAq1RWbPpa/.', false, '1990-02-15', '123 Main St, Springfield, IL 62701'),
+       ('Jane', 'Smith', 'jane.smith@example.com', '$2y$12$T2OCL4lu6qiR3i33qHc7AO5rLHXVpi0sNH2pvrkxrnAq1RWbPpa/.', false, '1985-11-22', '456 Elm St, New York, NY 10001'),
+       ('Alice', 'Johnson', 'alice.johnson@example.com', '$2y$12$T2OCL4lu6qiR3i33qHc7AO5rLHXVpi0sNH2pvrkxrnAq1RWbPpa/.', false, '1992-07-30', '789 Oak St, Los Angeles, CA 90001'),
+       ('Bob', 'Brown', 'bob.brown@example.com', '$2y$12$T2OCL4lu6qiR3i33qHc7AO5rLHXVpi0sNH2pvrkxrnAq1RWbPpa/.', false, '1988-05-14', '101 Pine St, Chicago, IL 60601'),
+       ('Charlie', 'Davis', 'charlie.davis@example.com', '$2y$12$T2OCL4lu6qiR3i33qHc7AO5rLHXVpi0sNH2pvrkxrnAq1RWbPpa/.', false, '1994-01-11', '202 Maple St, Miami, FL 33101'),
+       ('Emily', 'Miller', 'emily.miller@example.com', '$2y$12$T2OCL4lu6qiR3i33qHc7AO5rLHXVpi0sNH2pvrkxrnAq1RWbPpa/.', false, '1996-09-05', '303 Birch St, Seattle, WA 98101'),
+       ('David', 'Wilson', 'david.wilson@example.com', '$2y$12$T2OCL4lu6qiR3i33qHc7AO5rLHXVpi0sNH2pvrkxrnAq1RWbPpa/.', false, '1980-12-23', '404 Cedar St, Boston, MA 02101'),
+       ('Sophia', 'Moore', 'sophia.moore@example.com', '$2y$12$T2OCL4lu6qiR3i33qHc7AO5rLHXVpi0sNH2pvrkxrnAq1RWbPpa/.', true, '1993-03-18', '505 Redwood St, San Francisco, CA 94101'),
+       ('Michael', 'Taylor', 'michael.taylor@example.com', '$2y$12$T2OCL4lu6qiR3i33qHc7AO5rLHXVpi0sNH2pvrkxrnAq1RWbPpa/.', true, '1991-10-28', '606 Willow St, Austin, TX 73301'),
+       ('Olivia', 'Anderson', 'olivia.anderson@example.com', '$2y$12$T2OCL4lu6qiR3i33qHc7AO5rLHXVpi0sNH2pvrkxrnAq1RWbPpa/.', true, '1989-06-13', '707 Cherry St, Dallas, TX 75201');
 
 INSERT INTO rentals (book_id, member_id, rented_at, duration_of_rent, returned_at, operator_id)
 VALUES (1, 2, '2024-11-01', 14, null, 1),
